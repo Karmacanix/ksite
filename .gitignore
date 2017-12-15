@@ -58,7 +58,6 @@ coverage.xml
 *.log
 local_settings.py
 dev.py
-production.py
 
 # Flask stuff:
 instance/

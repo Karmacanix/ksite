@@ -20,7 +20,7 @@ db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
 # secret key
-
+SECRET_KEY = os.environ['SECRET_KEY'],
 # i don't need an emailer
 
 #disable collectstatic
