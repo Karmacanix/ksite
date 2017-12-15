@@ -1,0 +1,73 @@
+{% load static wagtailuserbar %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>
+            {% block title %}
+                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+                {% with self.get_site.site_name as site_name %}
+                    {% if site_name %}- {{ site_name }}{% endif %}
+                {% endwith %}
+            {% endblock %}
+        </title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/ksite.css' %}">
+        
+        {# fonts #}
+        <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link href="https://fonts.googleapis.com/css?family=Lato:900|Roboto|Montserrat:800" rel="stylesheet">
+        <style>
+            h1 {font-family: 'Montserrat', sans-serif;} h1 {font-size:72px}
+        </style>
+        <style>
+            h2,h3,h4,h5 {font-family: 'Lato', sans-serif;}
+        </style>
+        <style>
+            body {font-family: 'Roboto', sans-serif;}
+        </style>
+
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="w3-light-grey {% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+        <!-- w3-content defines a container for fixed size centered content, 
+        and is wrapped around the whole page content, except for the footer in this example -->
+        <div class="w3-content" style="max-width:1400px">
+            {% block content %}{% endblock %}
+        </div>
+        <!-- Footer -->
+        <footer class="w3-container w3-dark-grey w3-padding-16 w3-margin-top">
+            <div class="w3-bar w3-center">
+                <a href="http://127.0.0.1:8000/" class="w3-button"><i class="fas fa-home"></i></a>
+                <a href="https://www.linkedin.com/in/david-rigby-nz/" class="w3-button"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://twitter.com/Karmacanix" class="w3-button"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:dave.rigby@karmacanix.co.nz" class="w3-button"><i class="fas fa-envelope"></i></a>
+                <a href="https://bitbucket.org/Karmacanix/" class="w3-button"><i class="fab fa-bitbucket"></i></a>
+                <a href="https://github.com/Karmacanix" class="w3-button"><i class="fab fa-github"></i></a>
+                <a href="http://steamcommunity.com/id/organix/" class="w3-button"><i class="fab fa-steam"></i></a>
+                <a href="https://soundcloud.com/karmacanix" class="w3-button"><i class="fab fa-soundcloud"></i></a>
+            </div>
+        </footer>
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/ksite.js' %}"></script>
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32"> 
+    <h1>Karmacanix</h1>
+    <p>-information as a service-</p>
+</header>
+<!-- post -->
+<div class="w3-row">
+    <div class="w3-col l8 s12">
+        <div class="w3-card-4 w3-margin">
+            <div class="w3-container w3-border">
+                <h2>{{ page.title }}</h2>
+            </div>
+            <div class="w3-container w3-border w3-white">
+                <p><span class="w3-opacity">Last updated {{ page.updated }}</span></p>
+            </div>
+            <div class="w3-container w3-border w3-white">
+                {{ page.body|richtext }}
+            </div>
+            <div class="w3-container w3-border w3-white">
+                <p><a href="{{ page.get_parent.url }}">Return to homepage</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- Introduction menu -->
+    <div class="w3-col l4">
+        <!-- links -->
+        <div class="w3-card w3-margin">
+            <div class="w3-container w3-padding w3-border">
+                <h5><i class="fas fa-link"></i> Links</h5>
+            </div>
+            <div class="w3-container w3-white">
+                <br>
+                <a href="http://127.0.0.1:8000/"><i class="fas fa-home"></i> Return to homepage</a>
+            </div>
+            <div class="w3-container w3-white">
+                <br>
+            </div>
+        </div>
+        <!-- Tags -->
+        <div class="w3-card w3-margin">
+            <div class="w3-container w3-padding w3-border">
+                <h5><i class="fas fa-tags"></i> Tags</h5>
+            </div>
+            <div class="w3-container w3-white w3-text-deep-purple">
+                <br>
+                {% if page.get_tags %}
+                    {% for tag in page.get_tags  %}
+                        {% if forloop.last %}
+                            <i class="fas fa-tag"></i><a href="{{ tag.url }}"> {{ tag }}.</a>
+                        {% else %}
+                            <i class="fas fa-tag"></i><a href="{{ tag.url }}"> {{ tag }}, </a>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="w3-container w3-white">
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

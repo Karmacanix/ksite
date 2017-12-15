@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32"> 
+    <h1>Karmacanix</h1>
+    <subheading class="w3-text-deep-purple"><b>-information as a service-</b></subheading>
+</header>
+
+<!-- Grid -->
+<div class="w3-row">
+  {% if messages %} 
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% if tag %}
+    <p class="lead">Showing posts tagged with: <span class="w3-text-deep-purple"><i class="fas fa-tag"></i>{{ tag }}.</span></p>
+  {% endif %}
+<!-- Blog entries -->
+<div class="w3-col l8 s12">
+<!-- Blog entry -->
+{% for post in posts %}
+    {% with post=post.specific %}
+        <div class="w3-card-4 w3-margin">
+            <div class="w3-container w3-border">
+              <h3 class="w3-text-indigo"><a href="{% pageurl post %}"><b>{{ post.title }}</b></a></h3>
+            </div>
+            <div class="w3-container w3-white">
+              
+              <p><span class="w3-opacity">Posted: {{ post.updated }}</span></p>
+              {% if post.get_tags %}
+                {% for tag in post.get_tags %}
+                  {% if forloop.last %}
+                    <a href="{{ tag.url }}" class="w3-text-deep-purple"><i class="fas fa-tag"></i> {{ tag }}.</a>
+                  {% else %}
+                    <a href="{{ tag.url }}" class="w3-text-deep-purple"><i class="fas fa-tag"></i> {{ tag }}, </a>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
+            <div class="w3-container w3-white">
+                <p>{{ post.introduction|richtext }}</p>
+                <div class="w3-row">
+                    <div class="w3-col m8 s12">
+                        <p><a class="w3-button w3-padding-large w3-white w3-border w3-text-indigo" href="{% pageurl post %}"><b>READ MORE »</b></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    {% endwith %}
+{% endfor %}
+
+<!-- Pagination -->
+{% if posts.paginator.num_pages > 1 %}
+<div class="w3-center">
+  {% if posts.has_previous %}
+    <a href="?page={{ posts.previous_page_number }}" class="w3-button"><i class="fas fa-arrow-alt-circle-left fa-3x"></i></a>
+  {% else %}
+    <a href="#" class="w3-button w3-disabled"><i class="fas fa-arrow-alt-circle-left fa-3x"></i></a>
+  {% endif %}
+  <b>{{ posts.number }} of {{ posts.paginator.num_pages }}</b>
+  {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number }}" class="w3-button"><i class="fas fa-arrow-alt-circle-right fa-3x"></i></a>
+  {% else %}
+    <a href="#" class="w3-button w3-disabled"><i class="fas fa-arrow-alt-circle-right fa-3x"></i></a>
+  {% endif %}
+</div>
+{% endif %}
+
+<!-- END BLOG ENTRIES -->
+</div>
+
+<!-- Introduction menu -->
+<div class="w3-col l4">
+    
+  <!-- Posts -->
+  <div class="w3-card w3-margin">
+    <div class="w3-container w3-padding">
+      <h3>Latest</h3>
+    </div>
+    {% if tag %}
+      {% for post in posts %}
+        <ul class="w3-ul w3-border w3-hoverable w3-white">
+          {% with post=post.specific|slice:":5" %}
+            <li class="w3-padding-small">
+              <h5 class="w3-text-indigo"><a href="{% pageurl post %}">{{ post.title }}</a></h5>
+              <p>{{ post.introduction|richtext|truncatewords:8 }}...</p>
+              <p><span class="w3-opacity">{{ post.updated|date:"D jS, M Y" }} at {{ post.updated|date:"g:ia" }}</span></p>
+            </li>
+          {% endwith %}
+        </ul>
+      {% endfor %}
+    {% else %}
+      {% for post in latest_posts|slice:":5" %}
+        <ul class="w3-ul w3-border w3-hoverable w3-white">
+          {% with post=post.specific %}
+            <li class="w3-padding-small">
+              <h5 class="w3-text-indigo"><a href="{% pageurl post %}">{{ post.title }}</a></h5>
+              <p>{{ post.introduction|richtext|truncatewords:8 }}...</p>
+              <p><span class="w3-opacity">{{ post.updated|date:"D jS, M Y" }} at {{ post.updated|date:"g:ia" }}</span></p>
+            </li>
+          {% endwith %}
+        </ul>
+      {% endfor %}
+    {% endif %}  
+  </div>
+  <hr> 
+ 
+  <!-- Tags -->
+  <div class="w3-card w3-margin">
+    <div class="w3-container w3-padding w3-border">
+      <h4><i class="fas fa-tags"></i> Tags</h4>
+    </div>
+    <div class="w3-container w3-white w3-text-deep-purple">
+      <br>
+      {% if page.get_child_tags %}
+        {% for tag in page.get_child_tags %}
+          {% if forloop.last %}
+            <i class="fas fa-tag"></i><a href="{{ tag.url }}"> {{ tag }}.</a>
+          {% else %}
+            <i class="fas fa-tag"></i><a href="{{ tag.url }}"> {{ tag }},  </a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      {% if tag %}
+        <i class="fas fa-tag"></i><a href="{{ tag.url }}"> {{ tag }}.</a>
+      {% endif %}
+    </div>
+    <div class="w3-container w3-white">
+      <br>
+    </div>
+  </div>
+  
+<!-- END Introduction Menu -->
+</div>
+
+<!-- END GRID -->
+</div><br>
+
+{% endblock %}
