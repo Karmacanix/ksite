@@ -23,6 +23,8 @@ DATABASES['default'].update(db_from_env)
 
 # i don't need an emailer
 
+#disable collectstatic
+#heroku config:set DISABLE_COLLECTSTATIC=0
 
 
 try:
