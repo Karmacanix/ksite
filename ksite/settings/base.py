@@ -65,7 +65,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'ksite.urls'
@@ -124,7 +123,9 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, "live-static-files", "static-root")
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_LOCATION = 'static'
+
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 
 #STATIC_ROOT = "/home/cfedeploy/webapps/cfehome_static_root/"
 
@@ -132,6 +133,9 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "live-static-files", "media-root")
 
+MEDIAFILES_LOCATION = 'media'
+
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
 # Wagtail settings
 
@@ -139,4 +143,4 @@ WAGTAIL_SITE_NAME = "ksite"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
+BASE_URL = 'https://serene-bayou-31914.herokuapp.com'

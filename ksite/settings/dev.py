@@ -21,7 +21,7 @@ DATABASES = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-AWS_STORAGE_BUCKET_NAME = 'karmacanix2'
+AWS_STORAGE_BUCKET_NAME = 'karmastatix2'
 AWS_S3_REGION_NAME = 'us-east-2'  # e.g. us-east-2
 AWS_ACCESS_KEY_ID = 'AKIAJGKG6BOE2HJRC52A'
 AWS_SECRET_ACCESS_KEY = 'RJbPV1xdB+Tz0+ppcULPslQ5R6mX8h5HWPE6Ypgy'
