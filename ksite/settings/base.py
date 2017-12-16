@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'psycopg2',
+    'storages',
 
     'django.contrib.admin',
     'django.contrib.auth',
