@@ -30,7 +30,7 @@
     {% with post=post.specific %}
         <div class="w3-card-4 w3-margin">
             <div class="w3-container w3-border">
-              <h3 class="w3-text-indigo"><a href="{% pageurl post %}"><b>{{ post.title }}</b></a></h3>
+              <h3><b>{{ post.title }}</b></h3>
             </div>
             <div class="w3-container w3-white">
               
@@ -84,7 +84,7 @@
   <!-- Posts -->
   <div class="w3-card w3-margin">
     <div class="w3-container w3-padding">
-      <h3>Latest</h3>
+      <h4><i class="fas fa-newspaper"></i>Latest news</h4>
     </div>
     {% if tag %}
       {% for post in posts %}
