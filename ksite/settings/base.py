@@ -112,22 +112,31 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "ksite", "static"),
+)
 
-STATIC_URL = '/static/'
+AWS_ACCESS_KEY_ID = 'AKIAJDSU7PKXMWI4JSAA'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_STORAGE_BUCKET_NAME = 'karmastatix2' 
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "ksite", "static"),
 )
+
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 
 STATIC_ROOT = os.path.join(BASE_DIR, "live-static-files", "static-root")
 
 STATICFILES_LOCATION = 'static'
 
 STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-
-#STATIC_ROOT = "/home/cfedeploy/webapps/cfehome_static_root/"
 
 MEDIA_URL = "/media/"
 
@@ -143,4 +152,4 @@ WAGTAIL_SITE_NAME = "ksite"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'https://serene-bayou-31914.herokuapp.com'
+BASE_URL = 'http://serene-bayou-31914.herokuapp.com'

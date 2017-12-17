@@ -20,16 +20,7 @@ db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
 # secret key
-SECRET_KEY = os.environ['SECRET_KEY'],
-# i don't need an emailer
-AWS_STORAGE_BUCKET_NAME = 'karmacanix2'
-AWS_S3_REGION_NAME = 'us-east-2'  # e.g. us-east-2
-AWS_ACCESS_KEY_ID = 'AKIAJGKG6BOE2HJRC52A'
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-
-# Tell django-storages the domain to use to refer to static files.
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME 
-
+SECRET_KEY = 'pgwrjx8!i96wla1hr1*1wj0ibmhrpfbk6-!n5&27g5zl7gw-af'
 
 try:
     from .local import *
