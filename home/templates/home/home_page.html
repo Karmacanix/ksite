@@ -35,12 +35,10 @@
             <div class="w3-container w3-white">
               <p>{{ post.introduction|richtext }}</p>
             </div>
-            <div class="w3-display-container w3-white">
-              <div class="w3-row w3-padding w3-display-middle">
-                <div class="w3-col l4 m4 s4">
-                  <p><span class="w3-opacity">Posted: {{ post.updated }}</span></p>
-                </div>
-                <div class="w3-col l4 m4 s4">
+            <div class="w3-container w3-white">
+              <p><span class="w3-opacity">Posted: {{ post.updated }}</span></p>
+              <div class="w3-row w3-padding">
+                <div class="w3-col l6 m6 s6">
                   {% if post.get_tags %}
                     {% for tag in post.get_tags %}
                       {% if forloop.last %}
@@ -51,7 +49,7 @@
                     {% endfor %}
                   {% endif %}
                 </div>
-                  <div class="w3-col l4 m4 s4">
+                  <div class="w3-col l6 m6 s6">
                         <p><a class="w3-button w3-right w3-padding-large w3-white w3-border w3-text-deep-purple" href="{% pageurl post %}"><b>READ MORE »</b></a></p>
                     </div>
                 </div>
@@ -95,7 +93,7 @@
           {% with post=post.specific|slice:":5" %}
             <li class="w3-padding-small">
               <h5 class="w3-text-deep-purple"><a href="{% pageurl post %}">{{ post.title }}</a></h5>
-              <p>{{ post.introduction|richtext|truncatewords:8 }}...</p>
+              <p>{{ post.introduction|richtext|truncatewords:12 }}</p>
               <p><span class="w3-opacity">{{ post.updated|date:"D jS, M Y" }} at {{ post.updated|date:"g:ia" }}</span></p>
             </li>
           {% endwith %}
@@ -107,7 +105,7 @@
           {% with post=post.specific %}
             <li class="w3-padding-small">
               <h5 class="w3-text-deep-purple"><a href="{% pageurl post %}">{{ post.title }}</a></h5>
-              <p>{{ post.introduction|richtext|truncatewords:8 }}...</p>
+              <p>{{ post.introduction|richtext|truncatewords:12 }}</p>
               <p><span class="w3-opacity">{{ post.updated|date:"D jS, M Y" }} at {{ post.updated|date:"g:ia" }}</span></p>
             </li>
           {% endwith %}
