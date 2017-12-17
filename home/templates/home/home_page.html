@@ -37,8 +37,10 @@
             </div>
             <div class="w3-container w3-white">
               <div class="w3-row">
-                <div class="w3-col l6 m6 s6">
+                <div class="w3-col l4 m4 s4">
                   <p><span class="w3-opacity">Posted: {{ post.updated }}</span></p>
+                </div>
+                <div class="w3-col l4 m4 s4">
                   {% if post.get_tags %}
                     {% for tag in post.get_tags %}
                       {% if forloop.last %}
@@ -49,7 +51,7 @@
                     {% endfor %}
                   {% endif %}
                 </div>
-                  <div class="w3-col l6 m6 s6">
+                  <div class="w3-col l4 m4 s4">
                         <p><a class="w3-button w3-right w3-padding-large w3-white w3-border w3-text-deep-purple" href="{% pageurl post %}"><b>READ MORE »</b></a></p>
                     </div>
                 </div>
