@@ -14,6 +14,7 @@ from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
 
@@ -62,7 +63,7 @@ class StandardPage(Page):
             ])
         return tags
 
-    # Specifies parent to BlogPage as being BlogIndexPages
+    # Specifies parent to StandardPage as being HomePage
     parent_page_types = ['HomePage']
 
     # Specifies what content types can exist as children of BlogPage.
@@ -85,7 +86,7 @@ class HomePage(RoutablePageMixin, Page):
     ]
 
     # Speficies that only StandardPage objects can live under the home page
-    subpage_types = ['StandardPage']
+    subpage_types = ['StandardPage', 'LegendaryItem']
 
     # Defines a method to access the children of the page (e.g. StandardPage objects). 
     def children(self):
@@ -155,3 +156,26 @@ class HomePage(RoutablePageMixin, Page):
             tags += post.get_tags
         tags = sorted(set(tags))
         return tags
+
+
+class LegendaryItem(Page):
+    image64x64 = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    name = models.CharField(max_length=255)
+    url = models.URLField(blank=True)
+    purpose = RichTextField(blank=True)
+    reason = RichTextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    # Editor panels configuration
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+        FieldPanel('url'),
+        FieldPanel('purpose', classname="full"),
+        FieldPanel('reason', classname="full"),
+        ImageChooserPanel('image64x64'),
+    ]
+    
+    # Specifies parent to LegendaryItem as being HomePage
+    parent_page_types = ['HomePage']
